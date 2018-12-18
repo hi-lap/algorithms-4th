@@ -3,6 +3,7 @@ package sorting
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 type Ints []int
@@ -39,4 +40,23 @@ func (a Ints) Swap(i, j int) {
 }
 func (a Ints) Less(i, j int) bool {
 	return a[i] < a[j]
+}
+
+func (a Ints) IsSorted() bool {
+	for i := 1; i < a.Len(); i++ {
+		if a.Less(i, i-1) {
+			return false
+		}
+	}
+	return true
+}
+
+func (a Ints) String() string {
+	texts := []string{}
+	for _, item := range a {
+		texts = append(texts, strconv.Itoa(item))
+	}
+
+	text := strings.Join(texts, " ")
+	return "[" + text + "]"
 }
